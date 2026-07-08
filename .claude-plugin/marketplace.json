@@ -1,0 +1,11 @@
+{
+  "name": "rubicon-marketing-board",
+  "owner": { "name": "Dax Davis", "url": "https://daxdavis.com" },
+  "plugins": [
+    {
+      "name": "rubicon-marketing-board",
+      "source": "./",
+      "description": "A nine-seat marketing advisory board for Claude Code: decide, pressure-test, ideate, retrospect, and get smart — with advisors who challenge instead of cheerlead."
+    }
+  ]
+}
