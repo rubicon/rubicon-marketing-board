@@ -1,0 +1,10 @@
+# Per-issue worktrees (see repository process policy)
+worktrees/
+
+# OS junk
+.DS_Store
+
+# Editor junk
+*.swp
+.idea/
+.vscode/
