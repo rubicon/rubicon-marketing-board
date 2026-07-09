@@ -2,6 +2,7 @@
 
 ## 0.1.0 (2026-07-09)
 
+Rubicon Marketing Board v0.1.0 is the first release: nine seat agents, forty source dossiers, an orchestrator skill, four commands, and an eval suite that was actually run against the shipped agents before this tag went out, not just written and left on the shelf. Every seat argues from a real, published framework, not a vibe, and every full session seats at least one advisor whose job is to disagree with you. This is a first release, not a finished one: the eval suite covers the load-bearing paths, not every path, and the bench is going to grow. Nothing here was smoothed over to read better than it works.
 
 ### Features
 
