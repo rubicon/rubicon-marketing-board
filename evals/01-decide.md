@@ -32,8 +32,11 @@ No pre-existing session briefs required.
 
 - [ ] Posture is detected and confirmed as **Decide** before the board convenes.
 - [ ] 4–6 seats are convened, including `vera-stratton` (Strategy & GTM).
-- [ ] A designated dissenter is named, with the reason their documented
-      positions conflict with wherever the user's framing leans.
+- [ ] A designated dissenter is named, with a stated reason grounded in
+      their seat's documented positions (this input is a genuinely open
+      A-or-B question with no clear user lean, so the reason may cite
+      system/customer/measurement risk either option carries, rather than
+      conflict with a specific lean).
 - [ ] The synthesis presents 2–3 real options (not a single recommendation
       dressed as options), each with pros/cons/risks.
 - [ ] A trade-off map names the actual axis the options differ on.
