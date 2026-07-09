@@ -81,7 +81,12 @@ preserved, not averaged away]
 ## Per-posture synthesis variations
 
 The universal frame's section 7 (Chair's synthesis) takes a different shape
-per posture. Sections 1–6 stay as above; only the synthesis payload changes.
+per posture. Sections 1–6 stay as above. Within section 7, only the
+recommendation body — the posture-specific payload shown below (Options /
+Verdict / Themes / etc.) — replaces the generic placeholder; the trailer
+that follows it in every posture (**Next steps**, **Tripwires**,
+**Execution handoffs**, **Decision (user)**) still applies and is not shown
+again per posture below to avoid repetition.
 
 ### Decide
 
