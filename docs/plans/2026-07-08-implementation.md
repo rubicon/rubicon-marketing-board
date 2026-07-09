@@ -27,11 +27,13 @@ Six phases. Each phase begins with a model checkpoint telling the operator what 
 | Phase | Content | Model |
 |-------|---------|-------|
 | 1 | Plugin manifests, validation script, CI, release automation, governance docs | **Sonnet 5** |
-| 2 | Dossier template + 40 source dossiers | **Fable 5 (medium effort)** |
-| 3 | Nine seat agents | **Fable 5 (medium effort)** |
-| 4 | Orchestrator skill, references, commands | **Fable 5 (medium effort)** |
-| 5 | Evals | **Fable 5 (medium effort)** |
-| 6 | README, banner, marketplace listing, v0.1.0 release | **Fable 5 (medium effort)** |
+| 2 | Dossier template + 40 source dossiers | **Sonnet 5 writers + Opus 4.8 review pass** |
+| 3 | Nine seat agents | **Sonnet 5 writers + Opus 4.8 review pass** |
+| 4 | Orchestrator skill, references, commands | **Sonnet 5 writers + Opus 4.8 review pass** |
+| 5 | Evals | **Sonnet 5 writers + Opus 4.8 review pass** |
+| 6 | README, banner, marketplace listing, v0.1.0 release | **Sonnet 5; Fable 5 only for the README intro polish** |
+
+**Session and subagent structure:** run each phase in a FRESH Claude Code session opened in this repository root (never continue a prior phase's session — long histories are the dominant token cost). The session model is Sonnet 5 and acts as orchestrator: it dispatches one subagent per plan task (parallel where tasks are independent, e.g. the per-seat dossier tasks), giving each writer subagent a lean prompt containing only its task's plan section, the relevant template, and the worked example. Writer subagents run on the session model (Sonnet 5). Content phases (2–5) add an Opus review pass at close-out (see the phase close-out protocol). Subagents must be instructed to omit AI-authorship trailers from any commits or files.
 
 Phase issue setup (repeat at each phase start, substituting title/slug):
 
@@ -44,6 +46,8 @@ cd worktrees/dev-N-<slug>
 ```
 
 Phase close-out (repeat at each phase end):
+
+**Opus review pass (content phases 2–5, before pushing):** dispatch a review subagent with `model: opus` over the phase's full diff (`git diff main`). Its instructions: adversarially check every dossier/agent/skill/command/eval in the diff against the spec's grounding rules (§10) and the phase's per-file requirements — hunt fabricated quotes, name-flavored generic content (a take that survives with the source's name swapped), missing contrarian positions, section-structure drift from the template, and framework claims that don't trace to the listed works. Apply its findings as fixes, rerun validation, and summarize the review's findings and resolutions in the PR body.
 
 ```bash
 bash scripts/validate-plugin.sh   # must pass
@@ -632,7 +636,7 @@ If `PATCH` on that endpoint 404s, re-`PUT` the full protection payload from prov
 
 ## Phase 2 — Dossiers
 
-> **⚠ Model checkpoint: switch to Fable 5, medium effort.** This phase is distilled judgment about real people's published thinking — the quality ceiling of the whole product.
+> **⚠ Model checkpoint: fresh Sonnet 5 session; parallel Sonnet writer subagents (one per task); Opus review pass at close-out.** The per-dossier requirement tables and worked example carry the judgment; writers execute them, the Opus pass audits grounding.
 
 **Issue title:** `Source dossiers (40) and custom-advisor template`
 **Slug:** `dossiers`
@@ -843,7 +847,7 @@ Close out Phase 2 per the protocol (validation, push, PR `feat: add the forty so
 
 ## Phase 3 — Seat agents
 
-> **⚠ Model checkpoint: stay on Fable 5, medium effort.** Charters are judgment-heavy: each must be one coherent voice, not a committee.
+> **⚠ Model checkpoint: fresh Sonnet 5 session; parallel Sonnet writer subagents (one per agent file); Opus review pass at close-out.** The seat-requirements table and the Vera Stratton worked example set the bar; the Opus pass checks each charter reads as one coherent voice.
 
 **Issue title:** `Nine board-seat agents`
 **Slug:** `seat-agents`
@@ -994,7 +998,7 @@ Close out Phase 3 per the protocol (PR `feat: add the nine board-seat agents`).
 
 ## Phase 4 — Orchestrator skill, references, commands
 
-> **⚠ Model checkpoint: stay on Fable 5, medium effort.** The orchestrator encodes the board's judgment rules.
+> **⚠ Model checkpoint: fresh Sonnet 5 session; the skill/reference/command content is fully drafted in this plan; Opus review pass at close-out.**
 
 **Issue title:** `Orchestrator skill, seating references, profile template, and commands`
 **Slug:** `orchestrator-commands`
@@ -1272,7 +1276,7 @@ Close out Phase 4 per the protocol (PR `feat: add orchestrator skill, references
 
 ## Phase 5 — Evals
 
-> **⚠ Model checkpoint: stay on Fable 5, medium effort.** Pass criteria require judgment about what good board output looks like.
+> **⚠ Model checkpoint: fresh Sonnet 5 session; the scenario table specifies inputs and pass criteria; Opus review pass at close-out.**
 
 **Issue title:** `Eval scenarios for postures, seating, grounding, and hostility`
 **Slug:** `evals`
@@ -1318,7 +1322,7 @@ Close out Phase 5 per the protocol (PR `test: add and execute eval scenarios`).
 
 ## Phase 6 — README, banner, marketplace, release
 
-> **⚠ Model checkpoint: Fable 5 — bump to high effort for the README intro if available.** This is the public face and the maintainer-voice writing.
+> **⚠ Model checkpoint: fresh Sonnet 5 session for the phase; use Fable 5 (a short separate session or subagent) ONLY for the README intro paragraph — the one spot where maintainer-voice polish has real leverage.**
 
 **Issue title:** `README, banner, and v0.1.0 release preparation`
 **Slug:** `readme-release`
