@@ -1,10 +1,20 @@
 {
   "name": "rubicon-marketing-board",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A nine-seat marketing advisory board for Claude Code: decide, pressure-test, ideate, retrospect, and get smart — with advisors who challenge instead of cheerlead.",
-  "author": { "name": "Dax Davis", "url": "https://daxdavis.com" },
+  "author": {
+    "name": "Dax Davis",
+    "url": "https://daxdavis.com"
+  },
   "homepage": "https://github.com/rubicon/rubicon-marketing-board",
   "repository": "https://github.com/rubicon/rubicon-marketing-board",
   "license": "MIT",
-  "keywords": ["marketing", "advisory-board", "cmo", "strategy", "positioning", "growth"]
+  "keywords": [
+    "marketing",
+    "advisory-board",
+    "cmo",
+    "strategy",
+    "positioning",
+    "growth"
+  ]
 }
