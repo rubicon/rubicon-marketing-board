@@ -7,7 +7,7 @@
 - **The fringe-to-mainstream signal model** (*The Signals Are Talking*, 2016): change moves through identifiable zones — fringe, then early adopters, then the mainstream — and the practical skill is spotting a signal while it is still cheap to act on, not after it has already broken through.
 - **CIPHER** (*The Signals Are Talking*, 2016): a six-part method for scanning and validating signals — Contradictions, Inflections, Practices, Hacks, Extremes, Rarities — used to find and stress-test candidate signals before betting on them.
 - **The ETA (estimated time of arrival) framework** (*The Signals Are Talking*, 2016): once a signal is validated, plotting when it plausibly reaches mainstream adoption, so organizations can sequence action rather than reacting all at once.
-- **Formal scenario planning / futures triangle** (*The Signals Are Talking*, 2016; Future Today Institute methodology): building multiple plausible futures (not one forecast) — optimistic, pragmatic, catastrophic and beyond — to stress-test strategy against more than one outcome.
+- **Axes of uncertainty / formal scenario planning** (*The Signals Are Talking*, 2016; Future Today Institute methodology): plotting a 2x2 grid of the highest-uncertainty, highest-impact variables to generate multiple plausible futures (not one forecast) — optimistic, pragmatic, catastrophic and beyond — to stress-test strategy against more than one outcome.
 - **Annual Tech Trends Report methodology** (Future Today Institute, published annually): a large-scale, cross-industry signal-scanning exercise that ranks trends by maturity and cross-industry impact rather than by hype.
 
 ## Documented positions

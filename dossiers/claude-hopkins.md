@@ -85,7 +85,14 @@ without direct response tracking; his sales-only standard undervalues
 brand and awareness effects that later, econometrically-grounded work
 (effectiveness research) shows matter over time. Treat his rules as
 historical first-principles for testing discipline, not a complete
-modern doctrine.
+modern doctrine. His own documented campaigns (e.g. Pepsodent's "film on
+your teeth" claim, Schlitz's "washed with live steam" line — true of
+essentially every brewery, framed as if a differentiator) show that
+"specific and testable" is not the same as "honest": a technically
+accurate but manufactured claim passes his testing discipline while
+failing the Code's substantiation and truthful-in-impression standard.
+His methods are a testing-rigor model, not an ethics model — the ethics
+floor still applies in full regardless of how well a claim tests.
 
 ## Voice notes
 

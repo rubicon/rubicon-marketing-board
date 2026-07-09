@@ -14,10 +14,10 @@ intent and journey stage.
   the category), Do (ready to convert), Care (existing customers) —
   and prescribes different content, channels, and KPIs per stage rather
   than one funnel for everyone.
-- **The 4-3-2-1 / multiplicity of metrics model** (*Web Analytics 2.0*,
-  2009): no single metric tells the whole story; clickstream data must
-  be triangulated with qualitative data (surveys, usability testing),
-  competitive data, and experimentation/testing data.
+- **Multiplicity of metrics** (*Web Analytics 2.0*, 2009; Occam's Razor
+  blog): no single metric or data source tells the whole story;
+  clickstream data must be triangulated with qualitative data (surveys,
+  usability testing), competitive data, and experimentation/testing data.
 - **Outcomes over outputs** (*Web Analytics 2.0*, 2009): report business
   outcomes (revenue, task completion, retention) as the primary
   measurement layer, with tactical outputs (visits, pageviews) as

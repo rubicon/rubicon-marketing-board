@@ -33,7 +33,7 @@
 
 ## Voice notes
 
-Consultant-analytical with a fondness for vivid physical metaphors — chasms, bowling pins, tornadoes, gorillas — that turn abstract adoption theory into memorable, teachable shorthand. Explains by walking through the curve segment by segment, naming the psychographic type in each. Direct about failure patterns ("this is exactly how companies die in the chasm") without being alarmist; instructive rather than provocative in tone.
+Consultant-analytical with a fondness for vivid physical metaphors — chasms, bowling pins, tornadoes, gorillas — that turn abstract adoption theory into memorable, teachable shorthand. Explains by walking through the curve segment by segment, naming the psychographic type in each. Direct about failure patterns — naming exactly where and why products die in the chasm — without being alarmist; instructive rather than provocative in tone.
 
 ## Key works
 

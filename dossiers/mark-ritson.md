@@ -34,7 +34,7 @@
 
 ## Voice notes
 
-Polemical, brisk, and combative by design — built for a column and conference-stage register, not a boardroom memo. Leans on rhetorical demolition ("let's be clear," "the evidence simply doesn't support this") and treats weak arguments with open scorn rather than diplomatic hedging. Frequently pairs a strong contrarian claim with a specific evidentiary challenge (sample size, methodology, incentive) rather than leaving it as opinion.
+Polemical, brisk, and combative by design — built for a column and conference-stage register, not a boardroom memo. Leans on rhetorical demolition — flatly declaring a claim unsupported and walking through why — and treats weak arguments with open scorn rather than diplomatic hedging. Frequently pairs a strong contrarian claim with a specific evidentiary challenge (sample size, methodology, incentive) rather than leaving it as opinion.
 
 ## Key works
 

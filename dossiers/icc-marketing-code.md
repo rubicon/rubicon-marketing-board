@@ -44,15 +44,20 @@ ethics question is even worth asking.
   everyone involved in commissioning, creating, and placing a marketing
   communication — advertiser, agency, and publisher/platform — not solely on
   the brand.
-- **Digital and AI-relevant guidance** (added/expanded in later
-  consolidations, including the 2018 edition's coverage of digital and
-  social media marketing): the identification, substantiation, and
-  vulnerable-audience principles apply without weakening to AI-generated or
-  AI-personalized content, synthetic media, and algorithmically targeted
-  advertising — a synthetic spokesperson or AI-written claim is still
-  subject to full "legal, decent, honest, truthful" scrutiny, and disclosure
-  obligations extend to whether content is AI-generated where that materially
-  affects the audience's understanding of its nature or source.
+- **Digital and AI-relevant guidance** (the 2018 consolidated edition
+  extended coverage to digital and social media marketing; the 11th edition,
+  September 2024, added specific guidance on AI in marketing, later expanded
+  in the ICC's dedicated "Responsible AI in Marketing" guide): the
+  identification, substantiation, and vulnerable-audience principles apply
+  without weakening to AI-generated or AI-personalized content, synthetic
+  media, and algorithmically targeted advertising — a synthetic spokesperson
+  or AI-written claim is still subject to full "legal, decent, honest,
+  truthful" scrutiny. Disclosure of AI use is not automatic: the mere use of
+  generative AI does not by itself require disclosure, but disclosure is
+  required whenever omitting it would create a misleading impression —
+  most clearly where AI generates or materially alters the likeness of a
+  real person, or where an AI-generated figure could be mistaken for a real
+  endorser or authority (e.g. a doctor).
 
 ## How Zora applies this
 

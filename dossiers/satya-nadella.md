@@ -34,11 +34,12 @@ market repositioning can actually execute.
 - A company's culture, not its strategy deck, is the actual constraint on
   transformation; you cannot execute a new strategy through an unchanged
   culture. — *Hit Refresh*
-- Contrarian relative to command-and-control tech leadership norms: he
-  explicitly rejected the "know-it-all" culture he inherited (a culture that
-  prized having the answer over asking the question) as the primary
-  obstacle to Microsoft's renewal, at a company whose prior success was
-  substantially built by know-it-all engineering culture. — *Hit Refresh*
+- Contrarian relative to a "move fast and break things" AI-race posture: he
+  has argued AI advancement must be paired with proactive attention to
+  safety, trust, and societal effect rather than treated as a constraint on
+  competitive speed — a position that puts deliberate friction ahead of
+  pure velocity at a moment when the industry mostly rewards velocity. —
+  *Hit Refresh*; public remarks on responsible AI
 - Empathy is a legitimate and central input to strategy and product
   decisions in a technology company, not a distraction from rigor — he
   states this is personally shaped by his experience as a parent of a child
@@ -51,10 +52,6 @@ market repositioning can actually execute.
   cannibalize prior sources of advantage (his own framing of moving
   Microsoft from a Windows-first to a cloud- and mobile-first company)
   rather than defend the legacy business as the safe strategy. — *Hit
-  Refresh*
-- Technology's purpose and its makers' intent matter as much as its
-  capability — he argues companies bear responsibility for the societal
-  effects of what they build, not only for its market performance. — *Hit
   Refresh*
 
 ## Signature questions
