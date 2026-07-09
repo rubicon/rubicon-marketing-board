@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 240" role="img" aria-label="Rubicon Marketing Board">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1420"/>
+      <stop offset="1" stop-color="#1b2436"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="240" rx="12" fill="url(#bg)"/>
+  <g fill="none" stroke="#3d4c66" stroke-width="1.5" opacity="0.85">
+    <!-- nine seats around a board table -->
+    <ellipse cx="480" cy="150" rx="210" ry="46"/>
+    <circle cx="480" cy="84" r="9"/><circle cx="352" cy="96" r="9"/><circle cx="608" cy="96" r="9"/>
+    <circle cx="282" cy="128" r="9"/><circle cx="678" cy="128" r="9"/>
+    <circle cx="300" cy="182" r="9"/><circle cx="660" cy="182" r="9"/>
+    <circle cx="410" cy="204" r="9"/><circle cx="550" cy="204" r="9"/>
+  </g>
+  <text x="480" y="52" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#e8ecf4" letter-spacing="1">Rubicon Marketing Board</text>
+  <text x="480" y="230" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#8fa1bd">Nine advisors. Zero cheerleaders.</text>
+</svg>
