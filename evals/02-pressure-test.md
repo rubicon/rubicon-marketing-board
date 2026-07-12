@@ -10,7 +10,7 @@ session briefs required.
 
 ## Input
 
-```
+```text
 /board here's my Q3 plan: tear it apart.
 
 1. Launch a 20%-off promotion across all channels to hit the Q3 pipeline number.

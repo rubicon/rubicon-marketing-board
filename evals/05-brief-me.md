@@ -10,7 +10,7 @@ session briefs required.
 
 ## Input
 
-```
+```text
 /board get me smart on answer-engine optimization
 ```
 

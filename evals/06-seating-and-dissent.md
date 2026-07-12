@@ -12,19 +12,22 @@ below as separate sessions (fresh convening each time).
 ## Input
 
 **6a — Pricing:**
-```
+
+```text
 /board should we move from flat-rate to usage-based pricing?
 ```
 
 **6b — Creative review:**
-```
+
+```text
 /board review this campaign concept: a fear-based countdown timer on the
 pricing page telling visitors the discount expires in 10 minutes, reset on
 every visit.
 ```
 
 **6c — AI adoption, with an explicit seating override:**
-```
+
+```text
 /board should we adopt an AI content-generation tool for our blog — and
 add Silas Webb to the board for this one.
 ```

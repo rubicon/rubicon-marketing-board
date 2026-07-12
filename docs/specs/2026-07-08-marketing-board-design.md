@@ -168,6 +168,7 @@ The synthesizer's board brief contains, in order:
 Overridable per session ("convene as activists today").
 
 **`/board-profile` command** — one command, two states:
+
 - No profile: runs an interview (the fields above), offers to import from ecosystem context files if found (`.agents/product-marketing.md`, `brands/<name>/`), writes the file.
 - Profile exists: shows current answers; revises conversationally.
 
