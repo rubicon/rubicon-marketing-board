@@ -21,7 +21,7 @@ jobs:
           APP_ID: "op://Automation/rubicon-release-please-private-key/app id"
           PRIVATE_KEY: "op://Automation/rubicon-release-please-private-key/private key"
       - name: Mint app token
-        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: app-token
         with:
           app-id: ${{ steps.op.outputs.APP_ID }}
