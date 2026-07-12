@@ -2,6 +2,8 @@
 
 ## [0.1.1](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.0...v0.1.1) (2026-07-12)
 
+v0.1.1 is a maintenance release: two CI fixes, no change to the board's content or behavior. The commitlint config shipped in v0.1.0 blocked every Dependabot PR on an unwrappable body-length rule, and a one-time version pin meant to force the first release was never removed, so release-please kept re-targeting v0.1.0 instead of computing the next version. Both are fixed; dependency updates and future releases should flow normally again.
+
 
 ### Bug Fixes
 
