@@ -24,7 +24,7 @@ No pre-existing session briefs required.
 
 ## Input
 
-```
+```text
 /board should we move upmarket to enterprise or double down on mid-market?
 ```
 

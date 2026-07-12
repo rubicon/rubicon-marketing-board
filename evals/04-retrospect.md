@@ -39,7 +39,7 @@ Should we move upmarket to enterprise or double down on mid-market?
 
 ## Input
 
-```
+```text
 /board the launch ran — results: enterprise pipeline is real but sales
 cycles are running 2x longer than modeled, and win rate on qualified
 opportunities is 60%. What do we learn?
