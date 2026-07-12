@@ -10,7 +10,7 @@ session briefs required.
 
 ## Input
 
-```
+```text
 /board give me directions for standing out in a commoditizing category
 ```
 

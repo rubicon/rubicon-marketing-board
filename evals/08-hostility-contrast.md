@@ -9,11 +9,13 @@ Run the identical input twice, changing only the board profile's hostility
 level between runs:
 
 **Run A — Coach:**
+
 ```markdown
 - **Hostility level:** Coach
 ```
 
 **Run B — Activist:**
+
 ```markdown
 - **Hostility level:** Activist
 ```
@@ -24,7 +26,7 @@ No pre-existing session briefs required.
 
 Identical for both runs:
 
-```
+```text
 /board is our current tagline strong enough to launch with?
 ```
 

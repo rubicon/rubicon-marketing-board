@@ -51,7 +51,7 @@ Nine seats. Each is a fictional composite advisor: the reasoning is built from r
 
 ## Install
 
-```
+```bash
 claude plugin marketplace add rubicon/rubicon-marketing-board
 claude plugin install rubicon-marketing-board@rubicon-marketing-board
 ```

@@ -73,11 +73,13 @@ git worktree remove worktrees/dev-N-<slug> && git branch -D dev/N-<slug>; git pu
 ### Task 1.1: Validation script and plugin manifests
 
 **Files:**
+
 - Create: `scripts/validate-plugin.sh`
 - Create: `.claude-plugin/plugin.json`
 - Create: `.claude-plugin/marketplace.json`
 
 **Interfaces:**
+
 - Produces: `scripts/validate-plugin.sh` (exit 0 = valid; every later task runs it), `plugin.json` with `name: rubicon-marketing-board`, `version: 0.0.0`.
 
 - [ ] **Step 1: Write the validation script (the structural test — it must FAIL first)**
@@ -213,11 +215,13 @@ git commit -m "feat: add plugin manifests and structural validation script"
 ### Task 1.2: CI — commitlint, PR policy, validation
 
 **Files:**
+
 - Create: `commitlint.config.mjs`
 - Create: `.github/workflows/ci.yaml`
 - Create: `.github/workflows/pr-policy.yaml`
 
 **Interfaces:**
+
 - Produces: CI check names `validate`, `commitlint`, `pr-title`, `branch-name`, `issue-link` (pinned as required checks in Task 1.5).
 
 - [ ] **Step 1: Create commitlint config**
@@ -328,6 +332,7 @@ git commit -m "ci: add validation, commitlint, and PR policy workflows"
 ### Task 1.3: Release automation
 
 **Files:**
+
 - Create: `.github/workflows/release-please.yaml`
 - Create: `release-please-config.json`
 - Create: `.release-please-manifest.json`
@@ -427,6 +432,7 @@ git commit -m "ci: add release-please automation with 1Password-sourced app cred
 ### Task 1.4: Dependabot and governance docs
 
 **Files:**
+
 - Create: `.github/dependabot.yml` (GitHub-required short extension — policy escape hatch)
 - Create: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `ARCHITECTURE.md`, `CLAUDE.md`, `AGENTS.md`
 
@@ -644,10 +650,12 @@ If `PATCH` on that endpoint 404s, re-`PUT` the full protection payload from prov
 ### Task 2.1: Advisor template and worked example
 
 **Files:**
+
 - Create: `dossiers/advisor-template.md`
 - Create: `dossiers/april-dunford.md`
 
 **Interfaces:**
+
 - Produces: the dossier section structure every later dossier must match (validated by `validate-plugin.sh`): `## Core frameworks`, `## Documented positions`, `## Signature questions`, `## Best for / blind spots`, `## Voice notes`, `## Key works`.
 
 - [ ] **Step 1: Create the template** (adapted from marketingskills' marketing-council advisor template — credited in README, Phase 6)
@@ -855,9 +863,11 @@ Close out Phase 2 per the protocol (validation, push, PR `feat: add the forty so
 ### Task 3.1: Worked example — Vera Stratton
 
 **Files:**
+
 - Create: `agents/vera-stratton.md`
 
 **Interfaces:**
+
 - Produces: the agent-file structure all nine seats share. Frontmatter: `name`, `description`, `tools: Read, Grep, Glob` (no web tools in v1 — live research is out of scope per spec §13). Body sections in this order: Mandate / Sources / How you work / Default counter-questions / Decision rights / Blind spots / Postures / Hostility levels / Voice / Output contract.
 - Consumes: dossier files from Phase 2 via `${CLAUDE_PLUGIN_ROOT}/dossiers/<name>.md`.
 
@@ -1006,9 +1016,11 @@ Close out Phase 3 per the protocol (PR `feat: add the nine board-seat agents`).
 ### Task 4.1: The orchestrator skill
 
 **Files:**
+
 - Create: `skills/marketing-board/SKILL.md`
 
 **Interfaces:**
+
 - Consumes: the nine agents (spawned via the Agent/Task mechanism by name), `references/seating-map.md`, `references/session-formats.md`, `references/profile-template.md` (Task 4.2).
 - Produces: the session protocol every command routes into.
 
@@ -1115,6 +1127,7 @@ to be done. The board advises; it does not produce the deliverable.
 ### Task 4.2: References — seating map, session formats, profile template
 
 **Files:**
+
 - Create: `skills/marketing-board/references/seating-map.md`
 - Create: `skills/marketing-board/references/session-formats.md`
 - Create: `skills/marketing-board/references/profile-template.md`
@@ -1195,6 +1208,7 @@ Copy to `~/.claude/board-profile.md` (all projects) or
 ### Task 4.3: Commands
 
 **Files:**
+
 - Create: `commands/board.md`, `commands/consult.md`, `commands/redteam.md`, `commands/board-profile.md`
 
 Each is a thin pointer into the orchestrator skill. Full content:
@@ -1284,6 +1298,7 @@ Close out Phase 4 per the protocol (PR `feat: add orchestrator skill, references
 ### Task 5.1: Eval scenarios
 
 **Files:**
+
 - Create: `evals/README.md`, `evals/01-decide.md`, `evals/02-pressure-test.md`, `evals/03-ideate.md`, `evals/04-retrospect.md`, `evals/05-brief-me.md`, `evals/06-seating-and-dissent.md`, `evals/07-grounding.md`, `evals/08-hostility-contrast.md`
 
 - [ ] **Step 1: `evals/README.md`**
@@ -1330,6 +1345,7 @@ Close out Phase 5 per the protocol (PR `test: add and execute eval scenarios`).
 ### Task 6.1: Banner and README
 
 **Files:**
+
 - Create: `assets/banner.svg`
 - Modify: `README.md` (replace the placeholder entirely)
 
