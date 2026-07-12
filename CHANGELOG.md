@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.1](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.0...v0.1.1) (2026-07-12)
+
+v0.1.1 is a maintenance release: two CI fixes, no change to the board's content or behavior. The commitlint config shipped in v0.1.0 blocked every Dependabot PR on an unwrappable body-length rule, and a one-time version pin meant to force the first release was never removed, so release-please kept re-targeting v0.1.0 instead of computing the next version. Both are fixed; dependency updates and future releases should flow normally again.
+
+
+### Bug Fixes
+
+* **ci:** allow long body lines in commitlint ([#34](https://github.com/rubicon/rubicon-marketing-board/issues/34)) ([f420e17](https://github.com/rubicon/rubicon-marketing-board/commit/f420e174265fae6c8fb31ac4b5acb20e91769677)), closes [#33](https://github.com/rubicon/rubicon-marketing-board/issues/33)
+* **ci:** stop re-pinning release-please to v0.1.0 ([#37](https://github.com/rubicon/rubicon-marketing-board/issues/37)) ([42a62bc](https://github.com/rubicon/rubicon-marketing-board/commit/42a62bcfb0119d03de608bb7b1dff2361d9733eb)), closes [#36](https://github.com/rubicon/rubicon-marketing-board/issues/36)
+
 ## 0.1.0 (2026-07-09)
 
 Rubicon Marketing Board v0.1.0 is the first release: nine seat agents, forty source dossiers, an orchestrator skill, four commands, and an eval suite that was actually run against the shipped agents before this tag went out, not just written and left on the shelf. Every seat argues from a real, published framework, not a vibe, and every full session seats at least one advisor whose job is to disagree with you. This is a first release, not a finished one: the eval suite covers the load-bearing paths, not every path, and the bench is going to grow. Nothing here was smoothed over to read better than it works.
