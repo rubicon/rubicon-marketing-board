@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.1...v0.1.2) (2026-09-02)
+
+
+### Bug Fixes
+
+* **ci:** repair the broken release-please 1Password reference ([#51](https://github.com/rubicon/rubicon-marketing-board/issues/51)) ([50eb799](https://github.com/rubicon/rubicon-marketing-board/commit/50eb799c139274be8e9bfea316bdf3a8a289b807)), closes [#50](https://github.com/rubicon/rubicon-marketing-board/issues/50)
+
 ## [0.1.1](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.0...v0.1.1) (2026-07-12)
 
 v0.1.1 is a maintenance release: two CI fixes, no change to the board's content or behavior. The commitlint config shipped in v0.1.0 blocked every Dependabot PR on an unwrappable body-length rule, and a one-time version pin meant to force the first release was never removed, so release-please kept re-targeting v0.1.0 instead of computing the next version. Both are fixed; dependency updates and future releases should flow normally again.
