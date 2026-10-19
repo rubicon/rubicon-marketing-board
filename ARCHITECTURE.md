@@ -23,7 +23,13 @@ A Claude Code plugin, at repository root.
   points; each is a thin pointer into the orchestrator skill.
 - `evals/` — scenario documents (inputs + pass criteria) exercising postures,
   seating, grounding, and hostility. The test layer for prompt content.
+  `manifest.json` says how each one is driven and who decides each criterion;
+  `profiles/` holds the board profiles the runner seeds.
 - `scripts/validate-plugin.sh` — structural validation; run locally and in CI.
+- `scripts/run-evals.py` — drives the eval suite through headless sessions and
+  grades the briefs. Manual and pre-release only, never CI-gated: every eval
+  costs real model spend. `scripts/test-run-evals.py` covers its offline
+  logic and costs nothing.
 
 ## Why agents-per-seat
 

@@ -8,3 +8,6 @@ worktrees/
 *.swp
 .idea/
 .vscode/
+
+# Eval runner output (real sessions, real cost — never committed)
+eval-runs/

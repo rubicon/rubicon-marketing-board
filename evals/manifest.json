@@ -1,0 +1,220 @@
+{
+  "schema": 1,
+  "runner": "scripts/run-evals.py",
+  "note": "How each eval is driven and how each of its pass criteria is decided. The eval markdown stays the source of truth for the profile, the inputs and the criteria text; this file only says where the profile comes from and who decides each criterion. criteria_count is a deliberate tripwire: edit an eval's pass criteria and the runner refuses to run until this file is updated to match. `mode: structural` criteria are decided mechanically here. `mode: judge` criteria go to a judge session; checks listed on a judge criterion are PRECONDITIONS - a necessary condition the brief plainly fails settles the criterion without paying for a judge call, while a precondition passing decides nothing.",
+  "evals": [
+    {
+      "id": "01-decide",
+      "file": "evals/01-decide.md",
+      "pause_mode": "override",
+      "profile": { "from": "setup_fence", "index": 0 },
+      "criteria_count": 8,
+      "criteria": [
+        { "index": 1, "mode": "judge" },
+        {
+          "index": 2,
+          "mode": "structural",
+          "checks": [
+            {
+              "type": "subsection_count_between",
+              "start": "## Seat takes",
+              "end": "## Disagreement map",
+              "min": 4,
+              "max": 6
+            },
+            { "type": "contains_literal", "text": "vera-stratton" }
+          ]
+        },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" },
+        {
+          "index": 6,
+          "mode": "judge",
+          "checks": [
+            {
+              "type": "contains_literal",
+              "text": "## Where the board disagrees with you"
+            }
+          ]
+        },
+        { "index": 7, "mode": "judge" },
+        {
+          "index": 8,
+          "mode": "structural",
+          "checks": [
+            {
+              "type": "artifact_path_matches",
+              "pattern": "^board-sessions/\\d{4}-\\d{2}-\\d{2}-.+\\.md$"
+            },
+            { "type": "contains_literal", "text": "Decision (user)" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-pressure-test",
+      "file": "evals/02-pressure-test.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "criteria_count": 5,
+      "criteria": [
+        { "index": 1, "mode": "judge" },
+        { "index": 2, "mode": "judge" },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "03-ideate",
+      "file": "evals/03-ideate.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "criteria_count": 5,
+      "criteria": [
+        { "index": 1, "mode": "judge" },
+        { "index": 2, "mode": "judge" },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "04-retrospect",
+      "file": "evals/04-retrospect.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "seed_files": [
+        {
+          "path": "board-sessions/2026-06-01-enterprise-vs-midmarket.md",
+          "from": "setup_fence",
+          "index": 0
+        }
+      ],
+      "criteria_count": 6,
+      "criteria": [
+        { "index": 1, "mode": "judge", "grade_against": "transcript" },
+        { "index": 2, "mode": "judge" },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" },
+        { "index": 6, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "05-brief-me",
+      "file": "evals/05-brief-me.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "criteria_count": 5,
+      "criteria": [
+        { "index": 1, "mode": "judge" },
+        {
+          "index": 2,
+          "mode": "structural",
+          "checks": [{ "type": "contains_literal", "text": "wren-halley" }]
+        },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "06-seating-and-dissent",
+      "file": "evals/06-seating-and-dissent.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "criteria_count": 4,
+      "criteria": [
+        {
+          "index": 1,
+          "mode": "judge",
+          "checks": [
+            { "type": "contains_literal", "text": "emmett-grove" },
+            { "type": "contains_literal", "text": "vera-stratton" },
+            { "type": "contains_literal", "text": "ada-ledger" }
+          ]
+        },
+        {
+          "index": 2,
+          "mode": "judge",
+          "checks": [
+            { "type": "contains_literal", "text": "august-penn" },
+            { "type": "contains_literal", "text": "mira-voss" },
+            { "type": "contains_literal", "text": "cassia-frame" }
+          ]
+        },
+        {
+          "index": 3,
+          "mode": "judge",
+          "checks": [
+            { "type": "contains_literal", "text": "wren-halley" },
+            { "type": "contains_literal", "text": "zora-bell" }
+          ]
+        },
+        { "index": 4, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "07-grounding",
+      "file": "evals/07-grounding.md",
+      "pause_mode": "override",
+      "profile": { "from": "file", "path": "evals/profiles/boardroom.md" },
+      "criteria_count": 6,
+      "criteria": [
+        {
+          "index": 1,
+          "mode": "structural",
+          "checks": [
+            {
+              "type": "regex_count",
+              "pattern": "^> \\*\\*Simulation:\\*\\*",
+              "count": 1
+            }
+          ]
+        },
+        { "index": 2, "mode": "judge" },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" },
+        { "index": 6, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "08-hostility-contrast",
+      "file": "evals/08-hostility-contrast.md",
+      "pause_mode": "override",
+      "profile_variants": [
+        { "label": "coach", "from": "setup_fence", "index": 0 },
+        { "label": "activist", "from": "setup_fence", "index": 1 }
+      ],
+      "criteria_count": 4,
+      "criteria": [
+        { "index": 1, "mode": "judge" },
+        { "index": 2, "mode": "judge" },
+        { "index": 3, "mode": "judge" },
+        { "index": 4, "mode": "judge" }
+      ]
+    },
+    {
+      "id": "10-posture-confirmation",
+      "file": "evals/10-posture-confirmation.md",
+      "pause_mode": "observe",
+      "profile": { "from": "none" },
+      "criteria_count": 6,
+      "criteria": [
+        { "index": 1, "mode": "judge", "grade_against": "transcript" },
+        { "index": 2, "mode": "judge", "grade_against": "transcript" },
+        { "index": 3, "mode": "judge", "grade_against": "transcript" },
+        { "index": 4, "mode": "judge", "grade_against": "transcript" },
+        {
+          "index": 5,
+          "mode": "structural",
+          "checks": [{ "type": "artifact_count", "count": 0 }]
+        },
+        { "index": 6, "mode": "judge", "grade_against": "transcript" }
+      ]
+    }
+  ]
+}
