@@ -12,6 +12,14 @@ checkpoints, the Sonnet-writers + Opus-review-pass protocol): see
 `docs/plans/2026-07-08-implementation.md`. Directory map: see
 `ARCHITECTURE.md`.
 
+## Canonical host
+
+GitHub is the canonical host for this repository — an originating open-source
+repo, which the repository-process policy's own definition routes to GitHub
+rather than Forgejo. `origin` points at GitHub, and active development, CI,
+branch protection, releases, and the marketplace listing all live there. There
+is no Forgejo mirror to keep in sync, and no GitHub push restriction applies.
+
 ## Process (enforced by CI and branch protection)
 
 - Issue first for any change beyond trivial typo/metadata fixes.
