@@ -1,0 +1,35 @@
+name: marketplace-pin-drift
+
+# Fails when the rubicon/ai-skills marketplace pin no longer matches this
+# repository's latest release. Read-only: it compares two published values and
+# changes neither, so it needs no write access to the marketplace repository.
+#
+# Two triggers, because each catches a different failure:
+#   - release:published  — the bump was forgotten at release time.
+#   - schedule           — the bump was opened and never merged. A release-time
+#                          check cannot see that, because at release time the
+#                          pin is legitimately still on the old tag.
+
+on:
+  release:
+    types: [published]
+  schedule:
+    # 13:00 UTC Mondays — 08:00 CT, early enough to act on the same day.
+    - cron: '0 13 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pin-drift:
+    name: marketplace pin matches the latest release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Compare the marketplace pin with the latest release
+        env:
+          # Both repositories are public, so the default token's read scope is
+          # enough; it is passed only to stay inside the API rate limit.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/check-marketplace-pin.py
