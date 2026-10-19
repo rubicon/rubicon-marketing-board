@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.3...v0.1.4) (2026-10-19)
+
+
+### Features
+
+* **ci:** detect marketplace pin drift mechanically ([#63](https://github.com/rubicon/rubicon-marketing-board/issues/63)) ([d25bacf](https://github.com/rubicon/rubicon-marketing-board/commit/d25bacfcfa6efb58797f1c39e9024faa431f4fcb)), closes [#59](https://github.com/rubicon/rubicon-marketing-board/issues/59)
+
 ## [0.1.3](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.2...v0.1.3) (2026-10-19)
 
 v0.1.3 is the release where the board got a test harness, and the harness
