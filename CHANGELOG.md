@@ -2,6 +2,31 @@
 
 ## [0.1.3](https://github.com/rubicon/rubicon-marketing-board/compare/v0.1.2...v0.1.3) (2026-10-19)
 
+v0.1.3 is the release where the board got a test harness, and the harness
+immediately caught the board being quietly stripped of its own grounding. The
+chair's synthesis now emits a structured handoff block inline — advisory
+context, not a queue for something to poll. Dated evidence you supply reaches
+the seats through a table that records it verbatim and discloses, per seat,
+whether a take used it or only the dossiers; the board still fetches nothing
+itself. And there is finally a scripted eval runner: manual, pre-release, never
+CI-gated, because every run spends real money on real seat agents and a green
+run is not a substitute for reading a brief.
+
+The single bug fix is the runner's first lesson about itself. Loading a plugin
+does not grant permission to read that plugin's own files, so the first live
+run convened a board that could not open a single dossier, reasoned from seat
+charters alone, and produced a brief that looked entirely plausible — which the
+runner then scored as ordinary content failures. It now grants the directory
+under test, captures a brief wherever it lands, and refuses to grade a run it
+cannot trust rather than inventing verdicts for one.
+
+In the same spirit: eval 11 does not pass yet. The board composes its brief
+correctly and then cannot persist it, because the permission layer classifies
+the write as a sensitive file. That is a harness defect, not a content one, and
+it is tracked openly at
+https://github.com/rubicon/rubicon-marketing-board/issues/61 rather than
+smoothed over in these notes.
+
 
 ### Features
 
