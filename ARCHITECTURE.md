@@ -26,6 +26,11 @@ A Claude Code plugin, at repository root.
   `manifest.json` says how each one is driven and who decides each criterion;
   `profiles/` holds the board profiles the runner seeds.
 - `scripts/validate-plugin.sh` — structural validation; run locally and in CI.
+- `scripts/check-marketplace-pin.py` — read-only drift check: compares the
+  latest release tag with the `ref` the `rubicon/ai-skills` marketplace pins.
+  Run on release publication and weekly by
+  `.github/workflows/marketplace-pin-drift.yaml`;
+  `scripts/test-check-marketplace-pin.py` covers its logic offline.
 - `scripts/run-evals.py` — drives the eval suite through headless sessions and
   grades the briefs. Manual and pre-release only, never CI-gated: every eval
   costs real model spend. `scripts/test-run-evals.py` covers its offline
