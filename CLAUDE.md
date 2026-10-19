@@ -46,3 +46,12 @@ paragraph must be reapplied as the last step immediately before merging the
 release PR, not earlier. After merge, verify the actual GitHub Release's
 notes (`gh release view <tag> --json body`) — they are not reliably carried
 over from the PR body, and need `gh release edit` if empty.
+
+A release is not finished until the marketplace pin is bumped. This plugin
+is listed in the `rubicon` marketplace (`rubicon/ai-skills`) as an external
+`github` source pinned to a release tag, so installs follow releases rather
+than `main`. That pin does not move on its own: after cutting a release,
+open an issue and PR in `rubicon/ai-skills` updating the
+`rubicon-marketing-board` entry's `ref` in `.claude-plugin/marketplace.json`
+to the new tag. Skipping it leaves marketplace users on the previous
+release — v0.1.2 shipped 2026-09-02 and the pin sat at v0.1.1 for six weeks.
