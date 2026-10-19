@@ -34,3 +34,4 @@ jobs:
           globs: |
             **/*.md
             !CHANGELOG.md
+            !eval-runs/**
