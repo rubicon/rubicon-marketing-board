@@ -26,7 +26,29 @@ the brief it wrote, and decides each pass criterion. It is deliberately
 **not** wired into CI: every eval spawns a real board session with real seat
 agents, so a full run costs real model spend, and a green run is not a
 substitute for reading a brief. Exit codes are 0 all-pass, 1 any fail, 3 any
-`insufficient_evidence`.
+`insufficient_evidence`, 4 a run that could not be graded at all.
+
+### A run that cannot be graded says so
+
+A session is granted read access to the plugin directory it is testing.
+Without that, every seat's read of its dossiers is refused and the board
+reasons from its charter alone — while still producing a brief that looks
+fine. The first live run did exactly that, and scored nine criteria against a
+brief it had never captured.
+
+So the runner refuses to grade a run it cannot trust:
+
+- An eval that expects a brief and produced none is a **run error** (exit 4).
+  Nothing is graded and no judge call is paid for. `"expects_artifact": false`
+  marks the one eval where no brief is the correct outcome.
+- Briefs are captured from anywhere under the run directory, not only
+  `board-sessions/`. A brief written to the wrong path is a finding worth
+  seeing; a brief that silently vanishes is indistinguishable from a board
+  that produced nothing.
+- When a session reports being denied a read or a write, those lines are
+  printed and the run is blocked. This is a heuristic read of the transcript,
+  not a permission API — it errs toward blocking, because a brief produced
+  without dossiers is testing a different board than the one you think.
 
 `evals/manifest.json` says how each eval is driven and who decides each
 criterion. The markdown files stay the source of truth for the profile, the
