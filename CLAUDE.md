@@ -63,3 +63,6 @@ open an issue and PR in `rubicon/ai-skills` updating the
 `rubicon-marketing-board` entry's `ref` in `.claude-plugin/marketplace.json`
 to the new tag. Skipping it leaves marketplace users on the previous
 release — v0.1.2 shipped 2026-09-02 and the pin sat at v0.1.1 for six weeks.
+`.github/workflows/marketplace-pin-drift.yaml` now checks this on every
+release and weekly, so a forgotten or unmerged bump surfaces on its own
+instead of waiting to be noticed; it is read-only and never moves the pin.
