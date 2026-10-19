@@ -81,6 +81,14 @@ End with concrete next steps. Where the profile lists installed execution
 packs, name the specific skill to execute with; otherwise describe the work
 to be done. The board advises; it does not produce the deliverable.
 
+Alongside the prose handoff, emit the `handoffs` block from
+`references/session-formats.md` — one entry per next step. It stays inline in
+the brief: never write it to its own file or a fixed path, which would turn
+advisory context into a queue something could poll. The shape is provisional
+and has no automated consumer; nothing acts on it without a separate,
+deliberate decision to build that. Name only execution packs the profile
+actually lists; use `null` where the work is manual.
+
 ## Grounding rules (bind every session)
 
 - Label the session as simulation once, at the top of the brief.

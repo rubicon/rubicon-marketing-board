@@ -29,7 +29,7 @@ Every board brief contains these sections, in this order:
 
 Copyable skeleton:
 
-```markdown
+````markdown
 > **Simulation:** These are fictional composite advisors reasoning from
 > real, published frameworks and positions — not the actual people's
 > opinions on your situation.
@@ -75,8 +75,17 @@ preserved, not averaged away]
 
 **Execution handoffs:** [named skill/pack, or the work to be done manually]
 
-**Decision (user):**
+```yaml
+# Advisory context for the user, not work orders. Provisional shape — nothing
+# reads this automatically, and the board does not execute any of it.
+handoffs:
+  - skill: [installed pack to execute with, or null where the work is manual]
+    task: [one line — the work this step is]
+    inputs: [what that work needs from this session]
 ```
+
+**Decision (user):**
+````
 
 ## Per-posture synthesis variations
 
@@ -85,8 +94,8 @@ per posture. Sections 1–6 stay as above. Within section 7, only the
 recommendation body — the posture-specific payload shown below (Options /
 Verdict / Themes / etc.) — replaces the generic placeholder; the trailer
 that follows it in every posture (**Next steps**, **Tripwires**,
-**Execution handoffs**, **Decision (user)**) still applies and is not shown
-again per posture below to avoid repetition.
+**Execution handoffs**, the `handoffs` block, **Decision (user)**) still
+applies and is not shown again per posture below to avoid repetition.
 
 ### Decide
 
