@@ -324,6 +324,91 @@ class JudgeResponseParsing(unittest.TestCase):
         self.assertEqual(parsed["verdict"], "insufficient_evidence")
 
 
+DISCLOSING_BRIEF = """## Seat takes
+
+### vera-stratton
+
+Take.
+
+**Evidence used:** E1 (2026-09-14, Christopher Penn)
+
+### marcus-okonkwo
+
+Take.
+
+**Evidence used:** static dossiers only
+
+## Disagreement map
+
+1. A vs. B.
+"""
+
+PARTLY_DISCLOSING_BRIEF = """## Seat takes
+
+### vera-stratton
+
+Take.
+
+**Evidence used:** E1 (2026-09-14, Christopher Penn)
+
+### marcus-okonkwo
+
+Take, with no disclosure at all.
+
+## Disagreement map
+
+1. A vs. B.
+"""
+
+
+class PerSubsectionContains(unittest.TestCase):
+    """The disclosure invariant: EVERY seat take must declare what it used.
+
+    One seat quietly omitting its disclosure is exactly the failure the
+    evidence table exists to prevent, and it is the case a whole-document
+    `contains_literal` cannot see.
+    """
+
+    CHECK = {
+        "type": "per_subsection_contains",
+        "start": "## Seat takes",
+        "end": "## Disagreement map",
+        "text": "**Evidence used:**",
+    }
+
+    def test_passes_when_every_subsection_carries_the_disclosure(self):
+        verdict = run_evals.check_structural(self.CHECK, DISCLOSING_BRIEF)
+        self.assertEqual(verdict["verdict"], "pass")
+
+    def test_fails_when_one_subsection_omits_it(self):
+        verdict = run_evals.check_structural(self.CHECK, PARTLY_DISCLOSING_BRIEF)
+        self.assertEqual(verdict["verdict"], "fail")
+
+    def test_names_the_offending_subsection(self):
+        verdict = run_evals.check_structural(self.CHECK, PARTLY_DISCLOSING_BRIEF)
+        self.assertIn("marcus-okonkwo", verdict["evidence"])
+
+    def test_does_not_credit_a_disclosure_from_a_neighbouring_subsection(self):
+        # vera-stratton's disclosure must not satisfy marcus-okonkwo's.
+        verdict = run_evals.check_structural(self.CHECK, PARTLY_DISCLOSING_BRIEF)
+        self.assertNotIn("vera-stratton", verdict["evidence"])
+
+    def test_does_not_look_past_the_end_heading(self):
+        trailing = PARTLY_DISCLOSING_BRIEF + "\n### appendix\n\n**Evidence used:** x\n"
+        verdict = run_evals.check_structural(self.CHECK, trailing)
+        self.assertEqual(verdict["verdict"], "fail")
+
+    def test_a_missing_start_heading_fails_rather_than_vacuously_passing(self):
+        verdict = run_evals.check_structural(self.CHECK, "## Something else\n")
+        self.assertEqual(verdict["verdict"], "fail")
+
+    def test_a_section_with_no_subsections_fails_rather_than_vacuously_passing(self):
+        empty = "## Seat takes\n\nNothing here.\n\n## Disagreement map\n"
+        verdict = run_evals.check_structural(self.CHECK, empty)
+        self.assertEqual(verdict["verdict"], "fail")
+        self.assertIn("no subsections", verdict["evidence"])
+
+
 class ArtifactPathCheck(unittest.TestCase):
     def test_passes_when_a_brief_path_matches_the_required_shape(self):
         verdict = run_evals.check_structural(

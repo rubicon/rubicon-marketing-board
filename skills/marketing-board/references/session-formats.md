@@ -13,16 +13,22 @@ Every board brief contains these sections, in this order:
    published frameworks and positions, not their actual review.
 2. **The question before the board** — restatement, stakes, posture.
 3. **Seated** — who, why, and who was the designated dissenter.
-4. **Seat takes** — each advisor's position: signature questions applied,
+4. **Evidence on the table** — present only when the user supplied dated
+   context; omitted entirely otherwise. One row per supplied item: ID, date
+   and source exactly as the user gave them, the claim in their terms, and
+   which seats received it. Nothing the user did not supply appears here, and
+   the board fetches nothing.
+5. **Seat takes** — each advisor's position: signature questions applied,
    frameworks applied to the specifics, recommendation with conviction. No
    name-flavored generic advice: a take that survives with the name swapped
-   is a defect.
-5. **Disagreement map** — 2–4 genuine conflicts; the underlying trade-off
+   is a defect. Every take ends with **Evidence used:** — the IDs that seat
+   received, or `static dossiers only`.
+6. **Disagreement map** — 2–4 genuine conflicts; the underlying trade-off
    each represents; what evidence would settle each.
-6. **Where the board disagrees with you** — required section; names where
+7. **Where the board disagrees with you** — required section; names where
    advisors pushed back on the *user's* framing or lean, not just on each
    other. A board that only validates is a mirror.
-7. **Chair's synthesis** — recommendation fitted to the user's stage and
+8. **Chair's synthesis** — recommendation fitted to the user's stage and
    constraints (never forced consensus; dissent preserved); concrete next
    steps; tripwires (which advisor's warning to monitor and its signal);
    execution handoffs.
@@ -44,12 +50,24 @@ Copyable skeleton:
 - [Seat] — [why]
 - [Seat] — [why] **(designated dissenter — conflicts with the user's lean because [reason])**
 
+## Evidence on the table
+
+[Omit this whole section when the user supplied no dated context.]
+
+| ID | Date | Source | Claim, in the user's terms | Routed to |
+|----|------|--------|----------------------------|-----------|
+| E1 | [date exactly as given, or `undated`] | [source as given] | [claim as given] | [seats] |
+
+Supplied by the user; the board fetched nothing.
+
 ## Seat takes
 
 ### [Seat name]
 
 [Signature question(s) applied → framework(s) applied to the specifics →
 recommendation with conviction]
+
+**Evidence used:** [IDs this seat received, or `static dossiers only`]
 
 [... one subsection per seat ...]
 
@@ -89,8 +107,8 @@ handoffs:
 
 ## Per-posture synthesis variations
 
-The universal frame's section 7 (Chair's synthesis) takes a different shape
-per posture. Sections 1–6 stay as above. Within section 7, only the
+The universal frame's section 8 (Chair's synthesis) takes a different shape
+per posture. Sections 1–7 stay as above. Within section 8, only the
 recommendation body — the posture-specific payload shown below (Options /
 Verdict / Themes / etc.) — replaces the generic placeholder; the trailer
 that follows it in every posture (**Next steps**, **Tripwires**,

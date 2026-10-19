@@ -37,7 +37,11 @@ inputs and the criteria text.
 - **Structural** criteria are decided mechanically from the captured brief:
   heading presence, a count of seat subsections, the simulation label
   appearing exactly once, the brief landing at the configured path, whether
-  any brief was written at all.
+  any brief was written at all, and whether **every** seat subsection carries
+  a required line — which is how eval 11 enforces that no take is left
+  ambiguous about whether it used user-supplied evidence or dossiers alone.
+  A whole-document search cannot catch one seat quietly omitting it; a
+  per-subsection check can.
 - **Judgment** criteria go to a separate judge session, which must answer
   `pass`, `fail`, or `insufficient_evidence` and quote its evidence from the
   brief. `insufficient_evidence` is a real answer: it is never folded into a
