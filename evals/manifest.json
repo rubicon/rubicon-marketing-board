@@ -368,6 +368,51 @@
       ]
     },
     {
+      "id": "11-evidence-injection",
+      "file": "evals/11-evidence-injection.md",
+      "pause_mode": "override",
+      "profile": { "from": "setup_fence", "index": 0 },
+      "criteria_count": 9,
+      "criteria": [
+        {
+          "index": 1,
+          "mode": "judge",
+          "checks": [
+            { "type": "contains_literal", "text": "## Evidence on the table" }
+          ]
+        },
+        { "index": 2, "mode": "judge" },
+        {
+          "index": 3,
+          "mode": "structural",
+          "checks": [
+            {
+              "type": "per_subsection_contains",
+              "start": "## Seat takes",
+              "end": "## Disagreement map",
+              "text": "**Evidence used:**"
+            }
+          ]
+        },
+        { "index": 4, "mode": "judge" },
+        { "index": 5, "mode": "judge" },
+        { "index": 6, "mode": "judge" },
+        { "index": 7, "mode": "judge" },
+        {
+          "index": 8,
+          "mode": "judge",
+          "checks": [
+            {
+              "type": "regex_count",
+              "pattern": "^> \\*\\*Simulation:\\*\\*",
+              "count": 1
+            }
+          ]
+        },
+        { "index": 9, "mode": "judge" }
+      ]
+    },
+    {
       "id": "10-posture-confirmation",
       "file": "evals/10-posture-confirmation.md",
       "pause_mode": "observe",

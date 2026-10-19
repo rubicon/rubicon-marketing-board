@@ -58,6 +58,29 @@ question and context; a profile summary; the posture; the hostility level
 dissenter assignment if designated; and the instruction to return its take
 per its output contract. Do not add AI-authorship attributions anywhere.
 
+**Evidence on the table.** The board does not fetch anything: it never
+searches, browses, or pulls a source's current material, and no seat may
+claim it did. Dossiers are the standing grounding. The only other evidence
+admissible is what the USER supplies in the session.
+
+When the user supplies dated context, log it before spawning anyone. Build
+the evidence table in `references/session-formats.md`: one row per item, each
+with an ID (`E1`, `E2`, …), the date and source **exactly as the user gave
+them**, and the claim in the user's own terms. Carry an undated item as
+`undated` — never assign it a date, and never drop it for lacking one.
+Nothing enters that table that the user did not supply.
+
+You own the table, and it is the only route evidence takes to a seat: a spawn
+prompt may carry an item only by quoting its row, and it names which IDs that
+seat is receiving. A seat with no IDs is working from its dossiers alone.
+This is deliberate — if the table is missing, no seat can have received
+anything, so the worst case is a session that used no supplied evidence, not
+one that used it invisibly.
+
+A dated item by a real person is that person's published position on the
+topic. It is never that person weighing in on the user's company or plan, and
+a seat may not extend it into one.
+
 ### 5. Synthesize
 
 Assemble the board brief per `references/session-formats.md` for the
@@ -66,6 +89,14 @@ away); the disagreement map names the underlying trade-off in each conflict
 and what evidence would settle it; ALWAYS include "Where the board disagrees
 with you" — where seats pushed back on the user's own framing or lean. A
 board that only validates is a mirror.
+
+Every seat take carries an **Evidence used:** line — the IDs you sent that
+seat, or `static dossiers only`. You know which seats got which rows, so you
+are the one who can state it; do not ask the seats to self-report it. No take
+is left ambiguous between the two, because the whole point of the table is
+that a reader can tell a take informed by 2026-dated material from one built
+on a dossier. Where a supplied item cuts against a dossier's documented
+position, say so and keep both voices distinct rather than merging them.
 
 ### 6. Log the session
 

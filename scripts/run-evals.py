@@ -375,6 +375,41 @@ def check_structural(check, artifact, context=None):
             "evidence": f"no artifact matches {pattern!r}; found {paths}",
         }
 
+    if kind == "per_subsection_contains":
+        start = artifact.find(check["start"])
+        if start == -1:
+            return {
+                "verdict": "fail",
+                "evidence": f"section {check['start']!r} is absent",
+            }
+        end = artifact.find(check["end"], start + len(check["start"]))
+        span = artifact[start:] if end == -1 else artifact[start:end]
+
+        blocks = re.split(r"^###\s+", span, flags=re.MULTILINE)[1:]
+        if not blocks:
+            return {
+                "verdict": "fail",
+                "evidence": f"{check['start']!r} has no subsections to check",
+            }
+
+        missing = [
+            block.splitlines()[0].strip()
+            for block in blocks
+            if check["text"] not in block
+        ]
+        if missing:
+            return {
+                "verdict": "fail",
+                "evidence": (
+                    f"{check['text']!r} is missing from {len(missing)} of "
+                    f"{len(blocks)} subsection(s): {missing}"
+                ),
+            }
+        return {
+            "verdict": "pass",
+            "evidence": f"all {len(blocks)} subsection(s) carry {check['text']!r}",
+        }
+
     if kind == "absent_literal":
         unwanted = check["text"]
         if unwanted in artifact:
@@ -386,6 +421,7 @@ def check_structural(check, artifact, context=None):
 
 CHECK_TYPES = (
     "contains_literal",
+    "per_subsection_contains",
     "absent_literal",
     "regex_count",
     "subsection_count_between",
