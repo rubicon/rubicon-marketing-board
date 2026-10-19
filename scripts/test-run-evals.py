@@ -726,6 +726,142 @@ class ArtifactsExcludeSeeds(unittest.TestCase):
             )
 
 
+class GrantsThePluginDirectory(unittest.TestCase):
+    """Verified empirically: without --add-dir, a seat's read of
+    ${CLAUDE_PLUGIN_ROOT}/dossiers/*.md is refused with "Claude requested
+    permissions to read ... but you haven't granted it yet", so the board runs
+    with no dossiers and no canonical brief format. --plugin-dir loads the
+    plugin; it does not grant reads of the plugin's own content files."""
+
+    def test_passes_add_dir_for_the_plugin_directory(self):
+        argv = run_evals.build_session_command(
+            prompt="x", plugin_dir="/repo", model="m", pause_mode="override"
+        )
+        self.assertIn("--add-dir", argv)
+        self.assertEqual(argv[argv.index("--add-dir") + 1], "/repo")
+
+
+class RecursiveArtifactCapture(unittest.TestCase):
+    def test_finds_a_brief_written_to_a_nested_directory(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            run_evals.seed_run_dir(run_dir, None, [])
+            nested = run_dir / "board-sessions" / "2026" / "deep.md"
+            nested.parent.mkdir(parents=True, exist_ok=True)
+            nested.write_text("brief")
+            artifacts = run_evals.collect_artifacts(run_dir, [])
+            self.assertIn("board-sessions/2026/deep.md", [a["path"] for a in artifacts])
+
+    def test_finds_a_brief_written_outside_the_brief_directory(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            run_evals.seed_run_dir(run_dir, None, [])
+            (run_dir / "stray-brief.md").write_text("brief")
+            self.assertIn(
+                "stray-brief.md", [a["path"] for a in run_evals.collect_artifacts(run_dir, [])]
+            )
+
+    def test_does_not_capture_the_runner_s_own_bookkeeping(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            run_evals.seed_run_dir(run_dir, "## Board configuration", [])
+            (run_dir / "_run").mkdir(exist_ok=True)
+            (run_dir / "_run" / "notes.md").write_text("bookkeeping")
+            (run_dir / "board-sessions" / "real.md").write_text("brief")
+            paths = [a["path"] for a in run_evals.collect_artifacts(run_dir, [])]
+            self.assertEqual(paths, ["board-sessions/real.md"])
+
+    def test_does_not_capture_the_seeded_profile(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            run_dir = Path(tmp)
+            run_evals.seed_run_dir(run_dir, "## Board configuration", [])
+            (run_dir / "board-sessions" / "real.md").write_text("brief")
+            paths = [a["path"] for a in run_evals.collect_artifacts(run_dir, [])]
+            self.assertEqual(paths, ["board-sessions/real.md"])
+
+
+class ExpectedArtifacts(unittest.TestCase):
+    def test_an_eval_expects_an_artifact_by_default(self):
+        self.assertTrue(run_evals.expects_artifact({"id": "01-decide"}))
+
+    def test_an_eval_can_declare_that_it_expects_none(self):
+        self.assertFalse(
+            run_evals.expects_artifact({"id": "10", "expects_artifact": False})
+        )
+
+
+class RunBlocked(unittest.TestCase):
+    """A run that could not capture what it needed is a run-level error, not
+    nine criterion verdicts against nothing — and it must not pay for judging."""
+
+    def test_a_missing_required_artifact_blocks_the_run(self):
+        reason = run_evals.run_blocked_reason({"id": "11"}, artifacts=[], refusals=[])
+        self.assertIsNotNone(reason)
+        self.assertIn("no brief", reason.lower())
+
+    def test_a_captured_artifact_does_not_block_the_run(self):
+        self.assertIsNone(
+            run_evals.run_blocked_reason(
+                {"id": "11"}, artifacts=["board-sessions/x.md"], refusals=[]
+            )
+        )
+
+    def test_the_pause_eval_is_not_blocked_by_having_no_artifact(self):
+        self.assertIsNone(
+            run_evals.run_blocked_reason(
+                {"id": "10", "expects_artifact": False}, artifacts=[], refusals=[]
+            )
+        )
+
+    def test_the_pause_eval_is_blocked_when_a_brief_appears(self):
+        reason = run_evals.run_blocked_reason(
+            {"id": "10", "expects_artifact": False},
+            artifacts=["board-sessions/x.md"],
+            refusals=[],
+        )
+        self.assertIsNone(reason)
+
+    def test_reported_refusals_block_a_run_even_when_a_brief_exists(self):
+        reason = run_evals.run_blocked_reason(
+            {"id": "11"},
+            artifacts=["board-sessions/x.md"],
+            refusals=["dossiers/ reads were refused for permission"],
+        )
+        self.assertIsNotNone(reason)
+        self.assertIn("refus", reason.lower())
+
+
+class SessionRefusals(unittest.TestCase):
+    """A session that says it was denied its own grounding must not be read as
+    a session that merely produced a weak brief."""
+
+    def test_detects_a_reported_read_refusal(self):
+        found = run_evals.detect_refusals(
+            "All six seats reported that their dossiers/ reads were refused for permission"
+        )
+        self.assertTrue(found)
+
+    def test_detects_a_reported_write_block(self):
+        self.assertTrue(
+            run_evals.detect_refusals("Writes to the run directory were refused")
+        )
+
+    def test_quotes_the_line_it_matched(self):
+        found = run_evals.detect_refusals("line one\nwrites were refused here\nline three")
+        self.assertIn("writes were refused here", found[0])
+
+    def test_an_ordinary_brief_trips_nothing(self):
+        self.assertEqual(run_evals.detect_refusals(BRIEF), [])
+
+
 class NamespacingTheInput(unittest.TestCase):
     def test_rewrites_a_bare_board_command_to_the_namespaced_form(self):
         self.assertEqual(

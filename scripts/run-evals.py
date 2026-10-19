@@ -536,6 +536,13 @@ def build_session_command(prompt, plugin_dir, model, pause_mode):
         prompt,
         "--plugin-dir",
         str(plugin_dir),
+        # --plugin-dir loads the plugin; it does NOT grant permission to read
+        # the plugin's own content files. Without this, every seat's read of
+        # ${CLAUDE_PLUGIN_ROOT}/dossiers/*.md is refused and the board reasons
+        # with no dossiers and no canonical brief format, while still producing
+        # a plausible-looking brief. Verified against a live session.
+        "--add-dir",
+        str(plugin_dir),
         "--model",
         model,
         "--output-format",
@@ -613,14 +620,84 @@ def seed_run_dir(run_dir, profile, seed_files=()):
 
 
 def collect_artifacts(run_dir, seed_files=()):
-    """The briefs the BOARD wrote — a brief the runner seeded is not one."""
+    """Every markdown file the BOARD wrote anywhere under the run directory.
+
+    Deliberately not scoped to `board-sessions/*.md`: a session that writes its
+    brief somewhere else would otherwise be indistinguishable from a session
+    that produced nothing, and eval 10 depends on "no artifact" meaning no
+    artifact. A brief captured from the wrong path is a finding; a brief that
+    vanishes is a lie.
+
+    Excluded: the runner's own bookkeeping under `_run/`, the seeded profile
+    under `.claude/`, and any file the runner seeded itself.
+    """
     seeded = {seed["path"] for seed in seed_files}
-    briefs = sorted((run_dir / "board-sessions").glob("*.md"))
-    return [
-        {"path": str(p.relative_to(run_dir)), "text": p.read_text(encoding="utf-8")}
-        for p in briefs
-        if str(p.relative_to(run_dir)) not in seeded
-    ]
+    found = []
+    for path in sorted(run_dir.rglob("*.md")):
+        rel = str(path.relative_to(run_dir))
+        if rel.startswith("_run/") or rel.startswith(".claude/") or rel in seeded:
+            continue
+        found.append({"path": rel, "text": path.read_text(encoding="utf-8")})
+    return found
+
+
+def expects_artifact(entry):
+    """Whether this eval requires the board to have written a brief.
+
+    True for every eval except the pause eval, which asserts the opposite.
+    """
+    return entry.get("expects_artifact", True)
+
+
+# Phrases a session uses when it reports being denied its own grounding. This
+# is a heuristic read of the transcript, not a permission API, so it is
+# surfaced as a warning that something invalidated the run — never silently
+# folded into a criterion verdict.
+REFUSAL_MARKERS = (
+    "permission",
+    "were refused",
+    "was refused",
+    "refused for permission",
+    "write-blocked",
+    "writes to the run directory",
+    "haven't granted",
+    "could not read",
+    "unreadable",
+)
+
+
+def run_blocked_reason(entry, artifacts, refusals):
+    """Why this run cannot be graded, or None when it can.
+
+    Two blocking conditions, both learned from a live run that scored nine
+    criteria against a brief it never captured:
+
+    - An eval that expects a brief did not produce one the runner can see.
+    - The session reported being denied a read or a write, which means the
+      board was not working from its own dossiers or canonical formats. The
+      brief may look fine and still be testing a different board.
+    """
+    if expects_artifact(entry) and not artifacts:
+        return (
+            "no brief was captured, and this eval expects one — nothing was "
+            "graded and no judge was paid"
+        )
+    if refusals:
+        return (
+            "the session reported being denied a read or a write, so it was "
+            f"not working from its own grounding: {refusals[0][:160]}"
+        )
+    return None
+
+
+def detect_refusals(text):
+    """Lines where a session reported being denied a read or a write."""
+    hits = []
+    for line in (text or "").splitlines():
+        lowered = line.lower()
+        if any(marker in lowered for marker in REFUSAL_MARKERS):
+            hits.append(line.strip())
+    return hits
 
 
 def files_outside_allowed(run_dir):
@@ -714,6 +791,7 @@ def run_eval(entry, markdown, args, run_root):
                 "num_turns": fields.get("num_turns"),
                 "artifacts": [a["path"] for a in artifacts],
                 "files_outside_allowed": files_outside_allowed(run_dir),
+                "refusals": detect_refusals(fields.get("result") or ""),
                 "transcript_tail": (fields.get("result") or "")[-2000:],
             }
         )
@@ -741,6 +819,24 @@ def run_eval(entry, markdown, args, run_root):
             for a in artifacts_by_label[label]
         ]
     }
+
+    refusals = [r for item in record["inputs"] for r in item.get("refusals", [])]
+    record["refusals"] = refusals
+    blocked = run_blocked_reason(entry, context["artifact_paths"], refusals)
+    if blocked:
+        record["run_error"] = blocked
+        for item in entry.get("criteria", []):
+            record["criteria"].append(
+                {
+                    "index": item["index"],
+                    "mode": item["mode"],
+                    "graded_against": item.get("grade_against", "artifact"),
+                    "criterion": criteria[item["index"] - 1],
+                    "verdict": "insufficient_evidence",
+                    "evidence": f"run blocked: {blocked}",
+                }
+            )
+        return record
 
     def judge(text, artifact):
         return judge_criterion(text, artifact, args.judge_model, run_root)
@@ -779,6 +875,10 @@ def summarize(records):
 def print_report(records):
     for record in records:
         print(f"\n{record['id']}  ({record['pause_mode']})")
+        if record.get("run_error"):
+            print(f"  RUN BLOCKED: {record['run_error']}")
+        for line in record.get("refusals", [])[:3]:
+            print(f"  session reported: {line[:150]}")
         for item in record["inputs"]:
             if item.get("dry_run"):
                 print(f"  [dry-run] {item['label']}: {item['prompt']}")
@@ -939,6 +1039,8 @@ def main():
 
     if args.dry_run:
         return 0
+    if any(r.get("run_error") for r in records):
+        return 4
     if counts.get("fail"):
         return 1
     if counts.get("insufficient_evidence"):
